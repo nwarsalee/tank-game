@@ -56,24 +56,24 @@ function keyToggle(event, state) {
 // Keyboard functionality
 document.onkeydown = function(event) {
     keyToggle(event, true);
-}
+};
 
 document.onkeyup = function(event) {
     keyToggle(event, false);
-}
+};
 
 // Draw player function
 function drawPlayer(player) {
     let img = new Image();
     img.onload = function () {
         drawImageRot(img, player, 50, 50);
-    }
+    };
     img.src = "./img/tank.png";
 }
 
 function drawImageRot(img,player,width,height){
     // Store the current context state (i.e. rotation, translation etc..)
-    ctx.save()
+    ctx.save();
 
     //Convert degrees to radian
     let rad = (player.shot_angle - 90) * Math.PI / 180;
