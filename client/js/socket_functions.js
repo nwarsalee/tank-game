@@ -30,15 +30,21 @@ socket.on('update', function (package) {
 function keyToggle(event, state) {
     if (event.keyCode === 68) {            // 'D' key
         socket.emit("keyPress", {inputId:"right", state:state});
-    } else if (event.keyCode === 83) {     // 'S' key
+    }
+    if (event.keyCode === 83) {     // 'S' key
         socket.emit("keyPress", {inputId:"down", state:state});
-    } else if (event.keyCode === 65) {     // 'A' key
+    }
+    if (event.keyCode === 65) {     // 'A' key
         socket.emit("keyPress", {inputId:"left", state:state});
-    } else if (event.keyCode === 87) {     // 'W' key
+    }
+    if (event.keyCode === 87) {     // 'W' key
         socket.emit("keyPress", {inputId:"up", state:state});
-    } else if (event.keyCode === 37) { // left
+    }
+    if (event.keyCode === 37) { // left
+        console.log("LEFT");
         socket.emit("keyPress", {inputId: "leftArrow", state: state});
-    } else if (event.keyCode === 39) { // Right
+    }
+    if (event.keyCode === 39) { // Right
         socket.emit("keyPress", {inputId: "rightArrow", state : state});
     } else if (event.keyCode === 32) { // SpaceBar
         socket.emit("keyPress", {inputId: "spaceBar", state : state});

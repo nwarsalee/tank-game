@@ -59,7 +59,8 @@ setInterval(function(){
         pack[socket.id] = {};
         pack[socket.id].x = player.x;
         pack[socket.id].y = player.y;
-        
+        pack[socket.id].shot_angle = player.shot_angle;
+
     }
     
     for(let i in SOCKETLIST){ //for each socket send position of player
