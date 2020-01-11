@@ -1,7 +1,7 @@
 
 const ctx = document.getElementById("ctx").getContext("2d");
 const canvas_size = {x:800, y:800};
-const circle = {r:25, s_angle:0, e_angle:2*Math.PI}
+const circle = {r:5, s_angle:0, e_angle:2*Math.PI}
 
 var socket = io();
 
@@ -10,11 +10,10 @@ socket.on('update', function (package) {
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
-
-    // Updating all the player positions (drawing circles)
-    for (let i in package.pack) {
+    console.log(package);
+    // Updating all the player positions
+    for (let i in package.players) {
         let player = package.pack[i];
-
         drawPlayer(player);
 
         /*ctx.beginPath();
@@ -23,7 +22,13 @@ socket.on('update', function (package) {
         ctx.stroke();*/
     }
 
-    // Printing out the new position
+    //updating all bullet positions
+    for (let i in package.bullets) {
+        let bullets = package.bullets[i];
+        
+        ctx.arc(bullets.x, bullets.y, circle.r, circle.s_angle, circle.e_angle);
+        ctx.stroke();
+    }
     
 });
 

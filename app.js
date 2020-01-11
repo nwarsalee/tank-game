@@ -52,8 +52,8 @@ function checkBoundires(bullet){
 
 //---------GAME LOOP-------------//
 setInterval(function(){ 
-    let pack = {};
-    pack["bullets"] = [];
+    let players = {};
+    let bullets = {};
 
     for(let i in PLAYERLIST){ //for each player
         let player = PLAYERLIST[i];
@@ -61,9 +61,9 @@ setInterval(function(){
 
         //position of player
         player.updatePosition(); //update a players position based on their buttons corrently pressed
-        pack[socket.id] = {};
-        pack[socket.id].x = player.x;
-        pack[socket.id].y = player.y;
+        players[socket.id] = {};
+        players[socket.id].x = player.x;
+        players[socket.id].y = player.y;
 
         //shot-check
         if (player.keys['spaceBar'] && player.timer <= 0)
@@ -80,14 +80,14 @@ setInterval(function(){
         bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
         checkBoundires(bullet);//check if bullet should be deleted from list
             
-        pack["bullets"].push({
-            x
-        });
+        bullet[bullet.id] = {};
+        bullet[bullet.id].x = bullet.x;
+        bullet[bullet.id].y = bullet.y;
     }
     
     for(let i in SOCKETLIST){ //for each socket send position of player
         let socket = SOCKETLIST[i];
-        socket.emit("update", {"pack":pack}); 
+        socket.emit("update", {"players":players, "bullets":bullets}); 
     }
 
 },1000/25);
