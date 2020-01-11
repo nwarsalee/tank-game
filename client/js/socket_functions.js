@@ -14,7 +14,7 @@ socket.on('update', function (package) {
     // Updating all the player positions (drawing circles)
     for (let i in package.pack) {
         let player = package.pack[i];
-        
+
         ctx.beginPath();
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
@@ -24,7 +24,7 @@ socket.on('update', function (package) {
     
 });
 
-// Keyboard functionality
+// Key handles
 document.onkeydown = function(event) {
     if (event.keyCode === 68) {            // 'D' key
         socket.emit("keyPress", {inputId:"right", state:true});

@@ -13,15 +13,17 @@ class Entity {
         this.dy = 10;
         this.radius = 25;
     }
+
 }
 
 class Bullet extends Entity {
-    constructor(x, y, speed = 20) {
+    constructor(x, y, dx, dy, mag) {
         super();
         this.x = x;
         this.y = y;
-        this.dx = speed;
-        this.dy = speed;
+        this.dx = dx;
+        this.dy = dy;
+        this.mag = mag;
     }
 }
 
@@ -33,13 +35,22 @@ class Player extends Entity {
         this.keys = new Map();
         this.id = id;
     }
+
+    updatePosition(){
+        if (this.keys["up"] && this.y - this.dy >= 0)
+            this.y -= this.dy;
+        if (this.keys["down"] && this.y + this.dy <= Const.WIN_HEIGHT)
+            this.y += this.dy;
+        if (this.keys["left"] && this.x - this.dx >= 0)
+            this.x -= this.dx;
+        if (this.keys["right"] && this.x + this.dx <= Const.WIN_WIDTH)
+            this.x += this.dx;
+    }
 }
 
 
 module.exports = {
     Entity: Entity,
     Bullet: Bullet,
-    Tank: Tank,
-    Player: Player,
-    Enemy: Enemy
+    Player: Player
 };

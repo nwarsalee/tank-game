@@ -21,6 +21,7 @@ http.listen(3000, function(){
 
 var SOCKETLIST = {};
 var PLAYERLIST = {};
+var BULLETLIST = {};
 
 io.sockets.on("connection", function(socket){
     console.log("Socket connected");
@@ -51,31 +52,21 @@ io.sockets.on("connection", function(socket){
 
 });
 
-function updatePostion(player){
-    if (player.keys["up"] && player.y - player.dy >= 0)
-            player.y -= player.dy;
-    if (player.keys["down"] && player.y + player.dy <= Const.WIN_HEIGHT)
-        player.y += player.dy;
-    if (player.keys["left"] && player.x - player.dx >= 0)
-        player.x -= player.dx;
-    if (player.keys["right"] && player.x + player.dx <= Const.WIN_WIDTH)
-        player.x += player.dx;
-}
+
 
 //---------GAME LOOP-------------//
 setInterval(function(){ 
     let pack = {};
 
-    for(let i in SOCKETLIST){ //for each player
+    for(let i in PLAYERLIST){ //for each player
         let player = PLAYERLIST[i];
         let socket = SOCKETLIST[i];
-        
-        updatePostion(player); //update a players position based on their buttons corrently pressed
+
+        player.updatePosition(); //update a players position based on their buttons corrently pressed
         
         pack[socket.id] = {};
         pack[socket.id].x = player.x;
         pack[socket.id].y = player.y;
-
         
     }
     
@@ -83,6 +74,14 @@ setInterval(function(){
         let socket = SOCKETLIST[i];
         socket.emit("update", {"pack":pack}); 
     }
+
+    /*
+    for (let i in BULLETLIST){
+        let bullet = BULLETLIST[i];
+
+        bullet.updatePosition();
+    }
+    */
     
     
 
