@@ -19,6 +19,8 @@ class Player extends Tank {
 
     constructor() {
         super(); // allocate work to super
+
+        this.keys = new Map(["t", true]);
     }
 
 }
