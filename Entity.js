@@ -25,6 +25,7 @@ class Bullet extends Entity {
         this.dy = 0;
         this.mag = 10;
         this.angle = angle;
+        this.id = getRandomInt(1000);
     }
 
     updatePosition(){
@@ -59,10 +60,21 @@ class Player extends Entity {
 
         if (this.keys["leftArrow"] && this.keys["rightArrow"]) return;
 
-        if (this.keys["leftArrow"])
-            this.shot_angle -= Const.ROT_SPEED;
-        if (this.keys["rightArrow"])
-            this.shot_angle += Const.ROT_SPEED;
+        if (this.keys["leftArrow"]) {
+            if (this.shot_angle - Const.ROT_SPEED < 0)
+                this.shot_angle = 360 - Math.abs(this.shot_angle - Const.ROT_SPEED);
+            else
+                this.shot_angle -= Const.ROT_SPEED;
+        }
+
+        if (this.keys["rightArrow"]) {
+            if (this.shot_angle + Const.ROT_SPEED > 360)
+                this.shot_angle = 360 - this.shot_angle;
+            else
+                this.shot_angle += Const.ROT_SPEED;
+
+        }
+
     }
 }
 
