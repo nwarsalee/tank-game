@@ -16,6 +16,7 @@ socket.on('update', function (package) {
         let player = package.pack[i];
         
         ctx.beginPath();
+        ctx.rotate(player.shot_angle * Math.PI / 180);
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
     }
@@ -24,27 +25,27 @@ socket.on('update', function (package) {
     
 });
 
-// Keyboard functionality
-document.onkeydown = function(event) {
+function keyToggle(event, state) {
     if (event.keyCode === 68) {            // 'D' key
-        socket.emit("keyPress", {inputId:"right", state:true});
+        socket.emit("keyPress", {inputId:"right", state:state});
     } else if (event.keyCode === 83) {     // 'S' key
-        socket.emit("keyPress", {inputId:"down", state:true});
+        socket.emit("keyPress", {inputId:"down", state:state});
     } else if (event.keyCode === 65) {     // 'A' key
-        socket.emit("keyPress", {inputId:"left", state:true});
+        socket.emit("keyPress", {inputId:"left", state:state});
     } else if (event.keyCode === 87) {     // 'W' key
-        socket.emit("keyPress", {inputId:"up", state:true});
+        socket.emit("keyPress", {inputId:"up", state:state});
+    } else if (event.keyCode === 37) { // left
+        socket.emit("keyPress", {inputId: "leftArrow", state: state});
+    } else if (event.keyCode === 39) { // Right
+        socket.emit("keyPress", {inputId: "rightArrow", state : state});
     }
 }
 
+// Keyboard functionality
+document.onkeydown = function(event) {
+    keyToggle(event, true);
+}
+
 document.onkeyup = function(event) {
-    if (event.keyCode === 68) {            // 'D' key
-        socket.emit("keyPress", {inputId:"right", state:false});
-    } else if (event.keyCode === 83) {     // 'S' key
-        socket.emit("keyPress", {inputId:"down", state:false});
-    } else if (event.keyCode === 65) {     // 'A' key
-        socket.emit("keyPress", {inputId:"left", state:false});
-    } else if (event.keyCode === 87) {     // 'W' key
-        socket.emit("keyPress", {inputId:"up", state:false});
-    }
+    keyToggle(event, false);
 }

@@ -33,6 +33,19 @@ class Player extends Entity {
         this.keys = new Map();
         this.id = id;
     }
+
+
+    rotate() {
+        // equal, do no work
+        if (player.keys["leftArrow"] && player.keys["rightArrow"]) return;
+        // rotate based on pos or neg
+        if (player.keys["leftArrow"]) {
+            this.shot_angle -= Const.ROT_SPEED;
+        }
+        if (player.keys["rightArrow"]) {
+            this.shot_angle += Const.ROT_SPEED
+        }
+    }
 }
 
 
