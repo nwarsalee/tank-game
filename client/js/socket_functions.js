@@ -15,10 +15,12 @@ socket.on('update', function (package) {
     for (let i in package.pack) {
         let player = package.pack[i];
 
-        ctx.beginPath();
+        drawPlayer(player);
+
+        /*ctx.beginPath();
         ctx.rotate(player.shot_angle * Math.PI / 180);
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
-        ctx.stroke();
+        ctx.stroke();*/
     }
 
     // Printing out the new position
@@ -38,6 +40,8 @@ function keyToggle(event, state) {
         socket.emit("keyPress", {inputId: "leftArrow", state: state});
     } else if (event.keyCode === 39) { // Right
         socket.emit("keyPress", {inputId: "rightArrow", state : state});
+    } else if (event.keyCode === 32) { // SpaceBar
+        socket.emit("keyPress", {inputId: "spaceBar", state : state});
     }
 }
 
@@ -48,4 +52,13 @@ document.onkeydown = function(event) {
 
 document.onkeyup = function(event) {
     keyToggle(event, false);
+}
+
+// Draw player function
+function drawPlayer(player) {
+    let img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, player.x, player.y, 50, 50);
+    }
+    img.src = "./img/tank.png";
 }
