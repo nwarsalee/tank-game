@@ -15,18 +15,13 @@ let io = require('socket.io')(http);
 
 app.use(express.static(__dirname + "/client"));
 
-app.get("client/img/tank.png", (req, res) => {
-    console.log("Give the user tank img...");
-    res.sendFile("./img/tank.png");
-});
-
 http.listen(3000, function(){
 	console.log('File-Server listening on 3000');
 });
 
 var SOCKETLIST = {};
 var PLAYERLIST = {};
-var BULLETLIST = [];
+var BULLETLIST = {};
 
 io.sockets.on("connection", function(socket){
     console.log("Socket connected");
@@ -51,48 +46,35 @@ io.sockets.on("connection", function(socket){
 });
 
 
-function checkBoundires(bullet){
-
-}
-
 //---------GAME LOOP-------------//
 setInterval(function(){ 
     let pack = {};
-    pack["bullets"] = [];
 
     for(let i in PLAYERLIST){ //for each player
         let player = PLAYERLIST[i];
         let socket = SOCKETLIST[i];
 
-        //position of player
         player.updatePosition(); //update a players position based on their buttons corrently pressed
+        
         pack[socket.id] = {};
         pack[socket.id].x = player.x;
         pack[socket.id].y = player.y;
-
-        //shot-check
-        if (player.keys['spaceBar'] && player.timer <= 0)
-            BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
-
-        //shot timer count down
-        if (player.timer > 0)
-            player.timer -= 1;
-    }
-
-    for (let i in BULLETLIST){
-        let bullet = BULLETLIST[i];
-
-        bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
-        checkBoundires(bullet);//check if bullet should be deleted from list
-            
-        pack["bullets"].push({
-            x
-        });
+        
     }
     
     for(let i in SOCKETLIST){ //for each socket send position of player
         let socket = SOCKETLIST[i];
         socket.emit("update", {"pack":pack}); 
     }
+
+    /*
+    for (let i in BULLETLIST){
+        let bullet = BULLETLIST[i];
+
+        bullet.updatePosition();
+    }
+    */
+    
+    
 
 },1000/25);
