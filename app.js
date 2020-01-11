@@ -48,34 +48,45 @@ io.sockets.on("connection", function(socket){
 
 //---------GAME LOOP-------------//
 setInterval(function(){ 
-    let pack = {};
+    let players = {};
+    let bullets = {};
 
     for(let i in PLAYERLIST){ //for each player
         let player = PLAYERLIST[i];
         let socket = SOCKETLIST[i];
 
         player.updatePosition(); //update a players position based on their buttons corrently pressed
-        
-        pack[socket.id] = {};
-        pack[socket.id].x = player.x;
-        pack[socket.id].y = player.y;
-        pack[socket.id].shot_angle = player.shot_angle;
 
+        players[socket.id] = {};
+        players[socket.id].x = player.x;
+        players[socket.id].y = player.y;
+        players[socket.id].shot_angle = player.shot_angle;
+        //shot-check
+        if (player.keys['spaceBar'] && player.timer <= 0)
+            BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
+
+        //shot timer count down
+        if (player.timer > 0)
+            player.timer -= 1;
     }
+
     
-    for(let i in SOCKETLIST){ //for each socket send position of player
-        let socket = SOCKETLIST[i];
-        socket.emit("update", {"pack":pack}); 
-    }
-
-    /*
     for (let i in BULLETLIST){
         let bullet = BULLETLIST[i];
 
-        bullet.updatePosition();
+        bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
+        checkBoundires(bullet);//check if bullet should be deleted from list
+            
+        bullet[bullet.id] = {};
+        bullet[bullet.id].x = bullet.x;
+        bullet[bullet.id].y = bullet.y;
     }
-    */
     
     
+    
+    for(let i in SOCKETLIST){ //for each socket send position of player
+        let socket = SOCKETLIST[i];
+        socket.emit("update", {"players":players, "bullets":bullets}); 
+    }
 
 },1000/25);
