@@ -17,23 +17,34 @@ class Entity {
 }
 
 class Bullet extends Entity {
-    constructor(x, y, dx, dy, mag) {
+    constructor(x, y, angle) {
         super();
         this.x = x;
         this.y = y;
-        this.dx = dx;
-        this.dy = dy;
-        this.mag = mag;
+        this.dx = 0;
+        this.dy = 0;
+        this.mag = 10;
+        this.angle = angle;
+    }
+
+    updatePosition(){
+        this.dx = Math.sin(-(this.angle * (Math.PI / 180)));
+        this.dy = -Math.cos(this.angle * (Math.PI / 180));
+
+        this.y += this.dx * this.mag;
+        this.x += this.dy * this.mag;
+
     }
 }
 
 
 class Player extends Entity {
-    constructor(id = Tank.getRandomInt(1000)) {
+    constructor(id) {
         super();
         this.shot_angle = 90;
         this.keys = new Map();
         this.id = id;
+        this.timer = 10;
     }
 
     updatePosition(){

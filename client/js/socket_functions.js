@@ -40,6 +40,8 @@ function keyToggle(event, state) {
         socket.emit("keyPress", {inputId: "leftArrow", state: state});
     } else if (event.keyCode === 39) { // Right
         socket.emit("keyPress", {inputId: "rightArrow", state : state});
+    } else if (event.keyCode === 32) { // SpaceBar
+        socket.emit("keyPress", {inputId: "spaceBar", state : state});
     }
 }
 
