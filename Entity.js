@@ -25,29 +25,13 @@ class Bullet extends Entity {
     }
 }
 
-class Tank extends Entity {
-    // Default constructor
-    constructor() {
-        super();
-        this.rotation = 0;
-        this.name = "";
-        this.id = 0;
 
-    }
-}
-
-
-class Player extends Tank {
+class Player extends Entity {
     constructor(id = Tank.getRandomInt(1000)) {
         super();
+        this.shot_angle = 90;
         this.keys = new Map();
         this.id = id;
-    }
-}
-
-class Enemy extends Tank {
-    constructor() {
-        super(); // allocate work to super
     }
 }
 

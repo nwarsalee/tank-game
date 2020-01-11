@@ -22,17 +22,6 @@ http.listen(3000, function(){
 var SOCKETLIST = {};
 var PLAYERLIST = {};
 
-function updatePostion(player){
-    if (player.keys["up"] && player.y - player.dy >= 0)
-            player.y -= player.dy;
-    if (player.keys["down"] && player.y + player.dy <= Const.WIN_HEIGHT)
-        player.y += player.dy;
-    if (player.keys["left"] && player.x - player.dx >= 0)
-        player.x -= player.dx;
-    if (player.keys["right"] && player.x + player.dx <= Const.WIN_WIDTH)
-        player.x += player.dx;
-}
-
 io.sockets.on("connection", function(socket){
     console.log("Socket connected");
 
@@ -62,6 +51,17 @@ io.sockets.on("connection", function(socket){
 
 });
 
+function updatePostion(player){
+    if (player.keys["up"] && player.y - player.dy >= 0)
+            player.y -= player.dy;
+    if (player.keys["down"] && player.y + player.dy <= Const.WIN_HEIGHT)
+        player.y += player.dy;
+    if (player.keys["left"] && player.x - player.dx >= 0)
+        player.x -= player.dx;
+    if (player.keys["right"] && player.x + player.dx <= Const.WIN_WIDTH)
+        player.x += player.dx;
+}
+
 //---------GAME LOOP-------------//
 setInterval(function(){ 
     let pack = {};
@@ -75,8 +75,9 @@ setInterval(function(){
         pack[socket.id] = {};
         pack[socket.id].x = player.x;
         pack[socket.id].y = player.y;
-    }
 
+        
+    }
     
     for(let i in SOCKETLIST){ //for each socket send position of player
         let socket = SOCKETLIST[i];
