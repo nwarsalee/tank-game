@@ -1,20 +1,24 @@
-let MAXX = 500;
-let MAXY = 500;
-
+const WIN_HEIGHT = 500;
+const WIN_WIDTH = 500;
 "use strict";
 
-class Tank {
-
+class Entity {
     static getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    // Default constructor
     constructor() {
-        this.x = Tank.getRandomInt(MAXX);
-        this.y = Tank.getRandomInt(MAXY);
+        this.x = Tank.getRandomInt(WIN_WIDTH);
+        this.y = Tank.getRandomInt(WIN_HEIGHT);
         this.dx = 10;
         this.dy = 10;
+    }
+}
+
+class Tank extends Entity {
+    // Default constructor
+    constructor() {
+        super();
         this.rotation = 0;
         this.name = "";
         this.id = 0;
@@ -24,28 +28,24 @@ class Tank {
 
 
 class Player extends Tank {
-
-    constructor(id = Tank.getRandomInt(20)) {
+    constructor(id = Tank.getRandomInt(1000)) {
         super();
         this.keys = new Map();
-
         this.id = id;
     }
 
 }
 
 class Enemy extends Tank {
-
     constructor() {
         super(); // allocate work to super
     }
 }
 
-class Entity {
-
-}
 
 module.exports = {
+    Entity: Entity,
     Tank: Tank,
-    Player: Player
+    Player: Player,
+    Enemy: Enemy
 }
