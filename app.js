@@ -64,10 +64,13 @@ setInterval(function(){
         players[socket.id].x = player.x;
         players[socket.id].y = player.y;
         players[socket.id].shot_angle = player.shot_angle;
+        
         //shot-check
-        if (player.keys['spaceBar'] && player.timer <= 0)
+        if (player.keys['spaceBar'] && player.timer <= 0){
             BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
-            
+            player.timer = 10;
+        }
+
         //shot timer count down
         if (player.timer > 0)
             player.timer -= 1;

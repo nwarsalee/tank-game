@@ -10,7 +10,7 @@ socket.on('update', function (package) {
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
-    
+
     // Updating all the player positions
     for (let i in package.players) {
 
@@ -23,7 +23,6 @@ socket.on('update', function (package) {
     for (let i in package.bullets) {
         let bullet = package.bullets[i];
         
-        console.log(bullet.y);
         ctx.beginPath();
         ctx.arc(bullet.x, bullet.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
@@ -45,7 +44,6 @@ function keyToggle(event, state) {
         socket.emit("keyPress", {inputId:"up", state:state});
     }
     if (event.keyCode === 37) { // left
-        console.log("LEFT");
         socket.emit("keyPress", {inputId: "leftArrow", state: state});
     }
     if (event.keyCode === 39) { // Right
