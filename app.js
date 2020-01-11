@@ -6,6 +6,8 @@
  * Main file for tank-game
  */
 
+let tank = require("tank.js");
+
 let express = require("express");
 let app = express();
 let http = require("http").Server(app);
@@ -17,6 +19,46 @@ http.listen(3000, function(){
 	console.log('File-Server listening on 3000');
 });
 
+var SOCKETLIST = {};
+var PLAYERLIST = {};
+
 io.sockets.on("connection", function(socket){
-    console.log("test");
+    console.log("Socket connected");
+
+    socket.id = Math.random();
+    SOCKETLIST[socket.id] = socket;
+
+    //create player object
+    let player = Tank(socket.id);
+    PLAYERLIST[socket.id] = player;
+
+    socket.on('disconnect',function(){
+        delete SOCKETLIST[socket.id];
+        delete PLAYERLIST[socket.id];
+        
+    });
+
 });
+
+//---------GAME LOOP-------------//
+setInterval(function(){ 
+    let package = {};
+
+    for(let i in PLAYERLIST){ //for each socket
+        let player = PLAYERLIST[i];
+        
+        player.x += 1;
+        player.y += 2
+
+        package.push({
+            x:socket.x,
+            y:socket.y  
+        });
+    }
+
+    for(let i in SOCKETLIST){ //for each socket
+        let socket = SOCKETLIST[i];
+        socket.emit({"update":package}); 
+    }
+
+},1000/25);
