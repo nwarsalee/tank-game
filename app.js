@@ -6,7 +6,7 @@
  * Main file for tank-game
  */
 
-var Entities = require('./tank.js')
+var Entities = require('./Entity.js')
 
 let express = require("express");
 let app = express();

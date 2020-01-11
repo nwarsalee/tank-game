@@ -1,6 +1,7 @@
+"use strict";
+
 const WIN_HEIGHT = 500;
 const WIN_WIDTH = 500;
-"use strict";
 
 class Entity {
     static getRandomInt(max) {
@@ -8,10 +9,20 @@ class Entity {
     }
 
     constructor() {
-        this.x = Tank.getRandomInt(WIN_WIDTH);
-        this.y = Tank.getRandomInt(WIN_HEIGHT);
+        this.x = Entity.getRandomInt(WIN_WIDTH);
+        this.y = Entity.getRandomInt(WIN_HEIGHT);
         this.dx = 10;
         this.dy = 10;
+    }
+}
+
+class Bullet extends Entity {
+    constructor(x, y, speed = 20) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.dx = speed;
+        this.dy = speed;
     }
 }
 
@@ -33,7 +44,6 @@ class Player extends Tank {
         this.keys = new Map();
         this.id = id;
     }
-
 }
 
 class Enemy extends Tank {
@@ -45,7 +55,8 @@ class Enemy extends Tank {
 
 module.exports = {
     Entity: Entity,
+    Bullet: Bullet,
     Tank: Tank,
     Player: Player,
     Enemy: Enemy
-}
+};
