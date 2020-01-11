@@ -15,10 +15,12 @@ socket.on('update', function (package) {
     for (let i in package.pack) {
         let player = package.pack[i];
 
-        ctx.beginPath();
+        drawPlayer(player);
+
+        /*ctx.beginPath();
         ctx.rotate(player.shot_angle * Math.PI / 180);
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
-        ctx.stroke();
+        ctx.stroke();*/
     }
 
     // Printing out the new position
@@ -48,4 +50,13 @@ document.onkeydown = function(event) {
 
 document.onkeyup = function(event) {
     keyToggle(event, false);
+}
+
+// Draw player function
+function drawPlayer(player) {
+    let img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, player.x, player.y);
+    }
+    img.src = "/client/img/tank.png";
 }
