@@ -67,23 +67,23 @@ io.sockets.on("connection", function(socket){
 
 //---------GAME LOOP-------------//
 setInterval(function(){ 
-    let package = [];
+    let pack = {};
 
-    for(let i in PLAYERLIST){ //for each player
+    for(let i in SOCKETLIST){ //for each player
         let player = PLAYERLIST[i];
+        let socket = SOCKETLIST[i];
         
         updatePostion(player);
         
-        package.push({
-            x:player.x,
-            y:player.y
-        });
+        pack[socket.id] = {};
+        pack[socket.id].x = player.x;
+        pack[socket.id].y = player.y;
     }
 
     
     for(let i in SOCKETLIST){ //for each socket send position of player
         let socket = SOCKETLIST[i];
-        socket.emit("update", {"package":package}); 
+        socket.emit("update", {"pack":pack}); 
     }
     
     

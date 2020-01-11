@@ -6,7 +6,9 @@ const circle = {r:25, s_angle:0, e_angle:2*Math.PI}
 var socket = io();
 
 // Event when server wants to update the positions of people in the server
-socket.on('update', function (package) {
+socket.on('update', function (pack) {
+
+    console.log(pack.pack);
     // Clear the canvas
     ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
 
@@ -18,8 +20,6 @@ socket.on('update', function (package) {
         ctx.beginPath();
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
-
-        console.log("Player's new postion is - X:" + player.x + " Y:" + player.y);
     }
 
     // Printing out the new position
