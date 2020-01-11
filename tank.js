@@ -51,3 +51,7 @@ class Enemy extends Tank {
         super(); // allocate work to super
     }
 }
+
+class Entity {
+
+}
