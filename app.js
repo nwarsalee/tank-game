@@ -21,7 +21,7 @@ http.listen(3000, function(){
 
 var SOCKETLIST = {};
 var PLAYERLIST = {};
-var BULLETLIST = [];
+var BULLETLIST = {};
 
 io.sockets.on("connection", function(socket){
     console.log("Socket connected");
@@ -46,10 +46,6 @@ io.sockets.on("connection", function(socket){
 });
 
 
-function checkBoundires(bullet){
-
-}
-
 //---------GAME LOOP-------------//
 setInterval(function(){ 
     let players = {};
@@ -59,7 +55,6 @@ setInterval(function(){
         let player = PLAYERLIST[i];
         let socket = SOCKETLIST[i];
 
-        //position of player
         player.updatePosition(); //update a players position based on their buttons corrently pressed
         players[socket.id] = {};
         players[socket.id].x = player.x;
@@ -74,6 +69,7 @@ setInterval(function(){
             player.timer -= 1;
     }
 
+    
     for (let i in BULLETLIST){
         let bullet = BULLETLIST[i];
 
@@ -84,6 +80,8 @@ setInterval(function(){
         bullet[bullet.id].x = bullet.x;
         bullet[bullet.id].y = bullet.y;
     }
+    
+    
     
     for(let i in SOCKETLIST){ //for each socket send position of player
         let socket = SOCKETLIST[i];

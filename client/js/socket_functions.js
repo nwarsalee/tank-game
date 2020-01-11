@@ -63,7 +63,7 @@ document.onkeyup = function(event) {
 function drawPlayer(player) {
     let img = new Image();
     img.onload = function () {
-        ctx.drawImage(img, player.x, player.y);
+        ctx.drawImage(img, player.x, player.y, 50, 50);
     }
-    img.src = "/client/img/tank.png";
+    img.src = "./img/tank.png";
 }
