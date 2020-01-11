@@ -1,5 +1,4 @@
-const WIN_HEIGHT = 500;
-const WIN_WIDTH = 500;
+var Const = require('./consts.js')
 "use strict";
 
 class Entity {
@@ -8,10 +7,11 @@ class Entity {
     }
 
     constructor() {
-        this.x = Tank.getRandomInt(WIN_WIDTH);
-        this.y = Tank.getRandomInt(WIN_HEIGHT);
+        this.x = Tank.getRandomInt(Const.WIN_WIDTH);
+        this.y = Tank.getRandomInt(Const.WIN_HEIGHT);
         this.dx = 10;
         this.dy = 10;
+        this.radius = 25;
     }
 }
 

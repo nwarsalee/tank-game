@@ -6,15 +6,13 @@
  * Main file for tank-game
  */
 
-var Entities = require('./tank.js')
+var Entities = require('./Entity.js')
+var Const = require('./consts.js')
 
 let express = require("express");
 let app = express();
 let http = require("http").Server(app);
 let io = require('socket.io')(http);
-
-const WIN_WIDTH = 500;
-const WIN_HEIGHT = 500;
 
 app.use(express.static(__dirname + "/client"));
 
@@ -28,11 +26,11 @@ var PLAYERLIST = {};
 function updatePostion(player){
     if (player.keys["up"] && player.y - player.dy >= 0)
             player.y -= player.dy;
-    if (player.keys["down"] && player.y + player.dy <= WIN_HEIGHT)
+    if (player.keys["down"] && player.y + player.dy <= Const.WIN_HEIGHT)
         player.y += player.dy;
     if (player.keys["left"] && player.x - player.dx >= 0)
         player.x -= player.dx;
-    if (player.keys["right"] && player.x + player.dx <= WIN_WIDTH)
+    if (player.keys["right"] && player.x + player.dx <= Const.WIN_WIDTH)
         player.x += player.dx;
 }
 
@@ -73,7 +71,7 @@ setInterval(function(){
         let player = PLAYERLIST[i];
         let socket = SOCKETLIST[i];
         
-        updatePostion(player);
+        updatePostion(player); //update a players position based on their buttons corrently pressed
         
         pack[socket.id] = {};
         pack[socket.id].x = player.x;
