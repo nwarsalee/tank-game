@@ -59,10 +59,11 @@ setInterval(function(){
         let socket = SOCKETLIST[i];
 
         player.updatePosition(); //update a players position based on their buttons corrently pressed
+
         players[socket.id] = {};
         players[socket.id].x = player.x;
         players[socket.id].y = player.y;
-
+        players[socket.id].shot_angle = player.shot_angle;
         //shot-check
         if (player.keys['spaceBar'] && player.timer <= 0)
             BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
