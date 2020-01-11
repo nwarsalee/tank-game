@@ -29,13 +29,24 @@ io.sockets.on("connection", function(socket){
     SOCKETLIST[socket.id] = socket;
 
     //create player object
-    let player = Tank(socket.id);
+    let player = Player(socket.id);
     PLAYERLIST[socket.id] = player;
 
     socket.on('disconnect',function(){
         delete SOCKETLIST[socket.id];
         delete PLAYERLIST[socket.id];
         
+    });
+
+    sockdet.on('keyPress',function(data){
+        if (data.inputId === "left")
+            player.keys['left'] = data.state;
+        else if (data.inputId === "right")
+            player.keys['right'] = data.state;
+        else if (data.inputId === "up")
+            player.keys['up'] = data.state;
+        else if (data.inputId === "down")
+            player.keys['down'] = data.state;
     });
 
 });
@@ -47,18 +58,20 @@ setInterval(function(){
     for(let i in PLAYERLIST){ //for each socket
         let player = PLAYERLIST[i];
         
-        player.x += 1;
-        player.y += 2
-
+        player.updatePostion();
+        
         package.push({
-            x:socket.x,
-            y:socket.y  
+            x:player.x,
+            y:player.y
         });
     }
 
+    
     for(let i in SOCKETLIST){ //for each socket
         let socket = SOCKETLIST[i];
         socket.emit({"update":package}); 
     }
+    
+    
 
 },1000/25);
