@@ -45,6 +45,13 @@ class Player extends Entity {
             this.x -= this.dx;
         if (this.keys["right"] && this.x + this.dx <= Const.WIN_WIDTH)
             this.x += this.dx;
+
+        if (this.keys["leftArrow"] && this.keys["rightArrow"]) return;
+
+        if (this.keys["leftArrow"])
+            this.shot_angle -= Const.ROT_SPEED;
+        if (this.keys["rightArrow"])
+            this.shot_angle += Const.ROT_SPEED;
     }
 }
 
