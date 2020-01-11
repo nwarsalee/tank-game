@@ -19,11 +19,11 @@ class Entity {
 class Bullet extends Entity {
     constructor(x, y, angle) {
         super();
-        this.x = x;
-        this.y = y;
+        this.x = x + 25;
+        this.y = y + 25;
         this.dx = 0;
         this.dy = 0;
-        this.mag = 10;
+        this.mag = 20;
         this.angle = angle;
         this.id = Entity.getRandomInt(1000);
     }
