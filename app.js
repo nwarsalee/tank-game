@@ -40,18 +40,10 @@ io.sockets.on("connection", function(socket){
     });
 
     socket.on('keyPress',function(data){
-        if (data.inputId === "left")
-            player.keys['left'] = data.state;
-        else if (data.inputId === "right")
-            player.keys['right'] = data.state;
-        else if (data.inputId === "up")
-            player.keys['up'] = data.state;
-        else if (data.inputId === "down")
-            player.keys['down'] = data.state;
+        player.keys[data.inputId] = data.state;
     });
 
 });
-
 
 
 //---------GAME LOOP-------------//
