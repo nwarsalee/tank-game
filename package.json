@@ -1,0 +1,19 @@
+{
+  "name": "tank-game",
+  "version": "1.0.0",
+  "description": "Multiplayer game using socket.io, tank based shooter",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwarsalee/tank-game.git"
+  },
+  "author": "Nabeel Warsalee, Aaron Buitenwerf, Josh Chalenger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwarsalee/tank-game/issues"
+  },
+  "homepage": "https://github.com/nwarsalee/tank-game#readme"
+}
