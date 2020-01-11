@@ -10,23 +10,22 @@ socket.on('update', function (package) {
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
-    console.log(package);
+    
     // Updating all the player positions
     for (let i in package.players) {
-        let player = package.pack[i];
+
+        let player = package.players[i];
         drawPlayer(player);
 
-        /*ctx.beginPath();
-        ctx.rotate(player.shot_angle * Math.PI / 180);
-        ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
-        ctx.stroke();*/
     }
 
     //updating all bullet positions
     for (let i in package.bullets) {
-        let bullets = package.bullets[i];
+        let bullet = package.bullets[i];
         
-        ctx.arc(bullets.x, bullets.y, circle.r, circle.s_angle, circle.e_angle);
+        console.log(bullet.y);
+        ctx.beginPath();
+        ctx.arc(bullet.x, bullet.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
     }
     

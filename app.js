@@ -21,7 +21,7 @@ http.listen(3000, function(){
 
 var SOCKETLIST = {};
 var PLAYERLIST = {};
-var BULLETLIST = {};
+var BULLETLIST = [];
 
 io.sockets.on("connection", function(socket){
     console.log("Socket connected");
@@ -45,6 +45,9 @@ io.sockets.on("connection", function(socket){
 
 });
 
+function checkBoundires(bullet){
+
+}
 
 //---------GAME LOOP-------------//
 setInterval(function(){ 
@@ -63,7 +66,7 @@ setInterval(function(){
         //shot-check
         if (player.keys['spaceBar'] && player.timer <= 0)
             BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
-
+            
         //shot timer count down
         if (player.timer > 0)
             player.timer -= 1;
@@ -76,9 +79,9 @@ setInterval(function(){
         bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
         checkBoundires(bullet);//check if bullet should be deleted from list
             
-        bullet[bullet.id] = {};
-        bullet[bullet.id].x = bullet.x;
-        bullet[bullet.id].y = bullet.y;
+        bullets[bullet.id] = {};
+        bullets[bullet.id].x = bullet.x;
+        bullets[bullet.id].y = bullet.y;
     }
     
     

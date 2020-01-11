@@ -25,7 +25,7 @@ class Bullet extends Entity {
         this.dy = 0;
         this.mag = 10;
         this.angle = angle;
-        this.id = getRandomInt(1000);
+        this.id = Entity.getRandomInt(1000);
     }
 
     updatePosition(){
