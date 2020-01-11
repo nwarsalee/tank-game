@@ -50,11 +50,11 @@ class Player extends Entity {
     updatePosition(){
         if (this.keys["up"] && this.y - this.dy >= 0)
             this.y -= this.dy;
-        if (this.keys["down"] && this.y + this.dy <= Const.WIN_HEIGHT)
+        if (this.keys["down"] && this.y + this.dy <= Const.WIN_HEIGHT-Const.PLAYER_WIDTH)
             this.y += this.dy;
         if (this.keys["left"] && this.x - this.dx >= 0)
             this.x -= this.dx;
-        if (this.keys["right"] && this.x + this.dx <= Const.WIN_WIDTH)
+        if (this.keys["right"] && this.x + this.dx <= Const.WIN_WIDTH-Const.PLAYER_WIDTH)
             this.x += this.dx;
 
         if (this.keys["leftArrow"] && this.keys["rightArrow"]) return;
