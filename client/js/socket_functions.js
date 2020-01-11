@@ -13,8 +13,10 @@ socket.on('update', function (pack) {
     ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
 
     // Updating all the player positions (drawing circles)
-    for (let i in pack.pack) {
-        let player = pack.pack[i];
+    for (let i in package) {
+        let player = package[i];
+        player.x = 50;
+        player.y = 50;
         ctx.beginPath();
         ctx.arc(player.x, player.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();

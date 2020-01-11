@@ -7,11 +7,21 @@ class Entity {
     }
 
     constructor() {
-        this.x = Tank.getRandomInt(Const.WIN_WIDTH);
-        this.y = Tank.getRandomInt(Const.WIN_HEIGHT);
+        this.x = Entity.getRandomInt(Const.WIN_WIDTH);
+        this.y = Entity.getRandomInt(Const.WIN_HEIGHT);
         this.dx = 10;
         this.dy = 10;
         this.radius = 25;
+    }
+}
+
+class Bullet extends Entity {
+    constructor(x, y, speed = 20) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.dx = speed;
+        this.dy = speed;
     }
 }
 
@@ -33,7 +43,6 @@ class Player extends Tank {
         this.keys = new Map();
         this.id = id;
     }
-
 }
 
 class Enemy extends Tank {
@@ -45,7 +54,8 @@ class Enemy extends Tank {
 
 module.exports = {
     Entity: Entity,
+    Bullet: Bullet,
     Tank: Tank,
     Player: Player,
     Enemy: Enemy
-}
+};

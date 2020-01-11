@@ -8,7 +8,6 @@
 
 var Entities = require('./Entity.js')
 var Const = require('./consts.js')
-
 let express = require("express");
 let app = express();
 let http = require("http").Server(app);
