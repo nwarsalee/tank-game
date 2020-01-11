@@ -23,7 +23,6 @@ socket.on('update', function (package) {
     for (let i in package.bullets) {
         let bullet = package.bullets[i];
         
-        console.log(bullet.y);
         ctx.beginPath();
         ctx.arc(bullet.x, bullet.y, circle.r, circle.s_angle, circle.e_angle);
         ctx.stroke();
