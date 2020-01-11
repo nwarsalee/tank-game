@@ -58,5 +58,5 @@ function drawPlayer(player) {
     img.onload = function () {
         ctx.drawImage(img, player.x, player.y);
     }
-    img.src = "/client/img/tank.png";
+    img.src = "./client/img/tank.png";
 }

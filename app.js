@@ -15,6 +15,11 @@ let io = require('socket.io')(http);
 
 app.use(express.static(__dirname + "/client"));
 
+app.get("client/img/tank.png", (req, res) => {
+    console.log("Give the user tank img...");
+    res.sendFile("./img/tank.png");
+});
+
 http.listen(3000, function(){
 	console.log('File-Server listening on 3000');
 });
