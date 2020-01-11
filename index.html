@@ -9,5 +9,15 @@
 <body>
     <h1>Welcome to Tank game IO</h1>
     <p>Game is currently under construction right now, come back later to see if it's finished!</p>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('http://localhost');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    </script>
+    <script src="/app.js"></script>
 </body>
 </html>
