@@ -13,8 +13,8 @@ class Tank {
     constructor() {
         this.x = Tank.getRandomInt(MAXX);
         this.y = Tank.getRandomInt(MAXY);
-        this.dx = 0;
-        this.dy = 0;
+        this.dx = 10;
+        this.dy = 10;
         this.rotation = 0;
         this.name = "";
         this.id = 0;
@@ -27,23 +27,12 @@ class Player extends Tank {
 
     constructor(id = Tank.getRandomInt(20)) {
         super();
-        this.keys = new Map(["key", true]);
+        this.keys = new Map();
 
         this.id = id;
     }
 
 }
-
-Player.prototype.updatePosition = function() {
-    if (player.keys["up"] && player.y - dy >= 0)
-        player.y -= dy;
-    if (player.keys["down"] && player.y + dy <= MAXY)
-        player.y += dy;
-    if (player.keys["left"] && player.x - dx >= 0)
-        player.x -= dx;
-    if(player.keys["right"] && player.x + dx <= MAXX)
-        player.x += dx;
-};
 
 class Enemy extends Tank {
 
@@ -54,4 +43,9 @@ class Enemy extends Tank {
 
 class Entity {
 
+}
+
+module.exports = {
+    Tank: Tank,
+    Player: Player
 }
