@@ -76,7 +76,7 @@ function drawImageRot(img,player,width,height){
     ctx.save()
 
     //Convert degrees to radian
-    let rad = player.shot_angle * Math.PI / 180;
+    let rad = (player.shot_angle - 90) * Math.PI / 180;
 
     //Set the origin to the center of the image
     ctx.translate(player.x + width / 2, player.y + height / 2);
