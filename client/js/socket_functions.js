@@ -68,7 +68,27 @@ document.onkeyup = function(event) {
 function drawPlayer(player) {
     let img = new Image();
     img.onload = function () {
-        ctx.drawImage(img, player.x, player.y, 50, 50);
+        drawImageRot(img, player, 50, 50);
     }
     img.src = "./img/tank.png";
+}
+
+function drawImageRot(img,player,width,height){
+    // Store the current context state (i.e. rotation, translation etc..)
+    ctx.save()
+
+    //Convert degrees to radian
+    let rad = player.shot_angle * Math.PI / 180;
+
+    //Set the origin to the center of the image
+    ctx.translate(player.x + width / 2, player.y + height / 2);
+
+    //Rotate the canvas around the origin
+    ctx.rotate(rad);
+
+    //draw the image
+    ctx.drawImage(img,width / 2 * (-1),height / 2 * (-1),width,height);
+
+    // Restore canvas state as saved from above
+    ctx.restore();
 }
