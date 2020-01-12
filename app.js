@@ -88,7 +88,7 @@ setInterval(function(){
         
         for(let i in PLAYERLIST){ //check collision with each player
             let player = PLAYERLIST[i];
-            if (bullet.id != player.id && Math.pow(player.x - bullet.x, 2) + Math.pow(player.y - bullet.y, 2) <= (25 + 2.5)**2){
+            if (bullet.id != player.id && Math.pow(player.x - bullet.x, 2) + Math.pow(player.y - bullet.y, 2) <= (30)**2){
                 //hit detection
                 delete PLAYERLIST[i];
                 delete SOCKETLIST[i];

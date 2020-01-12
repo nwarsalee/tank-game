@@ -4,6 +4,10 @@ const circle = {r:5, s_angle:0, e_angle:2*Math.PI};
 
 var socket = io();
 
+var Img = {};
+Img.player = new Image();
+Img.player.src = "./img/tank.png";
+
 // Event when server wants to update the positions of people in the server
 socket.on('update', function (package) {
 
@@ -14,7 +18,7 @@ socket.on('update', function (package) {
     for (let i in package.players) {
 
         let player = package.players[i];
-        drawPlayer(player);
+        drawImageRot(Img.player, player, 50, 50);
 
     }
 
@@ -59,15 +63,6 @@ document.onkeydown = function(event) {
 
 document.onkeyup = function(event) {
     keyToggle(event, false);
-}
-
-// Draw player function
-function drawPlayer(player) {
-    let img = new Image();
-    img.onload = function () {
-        drawImageRot(img, player, 50, 50);
-    }
-    img.src = "./img/tank.png";
 }
 
 function drawImageRot(img,player,width,height){

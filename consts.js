@@ -1,6 +1,6 @@
 const WIN_WIDTH = 800;
 const WIN_HEIGHT = 800;
-const ROT_SPEED = 2;
+const ROT_SPEED = 4;
 
 const PLAYER_WIDTH = 50;
 

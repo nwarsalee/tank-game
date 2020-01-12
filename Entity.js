@@ -9,8 +9,8 @@ class Entity {
     constructor() {
         this.x = Entity.getRandomInt(Const.WIN_WIDTH);
         this.y = Entity.getRandomInt(Const.WIN_HEIGHT);
-        this.dx = 5;
-        this.dy = 5;
+        this.dx = 3;
+        this.dy = 3;
         this.radius = 25;
     }
 
@@ -23,7 +23,7 @@ class Bullet extends Entity {
         this.y = y + 25;
         this.dx = 0;
         this.dy = 0;
-        this.mag = 20;
+        this.mag = 15;
         this.angle = angle;
         this.id = id;
     }
