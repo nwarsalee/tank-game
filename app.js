@@ -45,8 +45,12 @@ io.sockets.on("connection", function(socket){
 
 });
 
-function checkBoundires(bullet){
-
+// Checks to see if the bullet is out of bounds
+function outOfBounds(bullet){
+    if (bullet.x < 0 || bullet.x > Const.WIN_HEIGHT || bullet.y < 0 || bullet.y > Const.WIN_HEIGHT) {
+        return true;
+    }
+    return false;
 }
 
 //---------GAME LOOP-------------//
@@ -81,10 +85,10 @@ setInterval(function(){
         let bullet = BULLETLIST[i];
 
         bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
-        checkBoundires(bullet);//check if bullet should be deleted from list
-
-        for (let i in PLAYERLIST){
-            
+        //check if bullet should be deleted from list
+        if (outOfBounds(bullet)) {
+            BULLETLIST.splice(i, 1);
+            console.log(BULLETLIST);
         }
 
         bullets[bullet.id] = {};
