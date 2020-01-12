@@ -9,8 +9,8 @@ class Entity {
     constructor() {
         this.x = Entity.getRandomInt(Const.WIN_WIDTH);
         this.y = Entity.getRandomInt(Const.WIN_HEIGHT);
-        this.dx = 10;
-        this.dy = 10;
+        this.dx = 5;
+        this.dy = 5;
         this.radius = 25;
     }
 

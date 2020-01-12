@@ -1,7 +1,6 @@
-
 const ctx = document.getElementById("ctx").getContext("2d");
-const canvas_size = {x:800, y:800};
-const circle = {r:5, s_angle:0, e_angle:2*Math.PI}
+const circle = {r:5, s_angle:0, e_angle:2*Math.PI};
+
 
 var socket = io();
 
@@ -9,7 +8,7 @@ var socket = io();
 socket.on('update', function (package) {
 
     // Clear the canvas
-    ctx.clearRect(0, 0, canvas_size.x, canvas_size.y);
+    ctx.clearRect(0, 0, 800, 800);
 
     // Updating all the player positions
     for (let i in package.players) {
@@ -56,27 +55,27 @@ function keyToggle(event, state) {
 // Keyboard functionality
 document.onkeydown = function(event) {
     keyToggle(event, true);
-};
+}
 
 document.onkeyup = function(event) {
     keyToggle(event, false);
-};
+}
 
 // Draw player function
 function drawPlayer(player) {
     let img = new Image();
     img.onload = function () {
         drawImageRot(img, player, 50, 50);
-    };
+    }
     img.src = "./img/tank.png";
 }
 
 function drawImageRot(img,player,width,height){
     // Store the current context state (i.e. rotation, translation etc..)
-    ctx.save();
+    ctx.save()
 
     //Convert degrees to radian
-    let rad = (player.shot_angle - 90) * Math.PI / 180;
+    let rad = player.shot_angle * Math.PI / 180;
 
     //Set the origin to the center of the image
     ctx.translate(player.x + width / 2, player.y + height / 2);

@@ -68,7 +68,7 @@ setInterval(function(){
         //shot-check
         if (player.keys['spaceBar'] && player.timer <= 0){
             BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
-            player.timer = 10;
+            player.timer = 40;
         }
 
         //shot timer count down
@@ -82,7 +82,11 @@ setInterval(function(){
 
         bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
         checkBoundires(bullet);//check if bullet should be deleted from list
+
+        for (let i in PLAYERLIST){
             
+        }
+
         bullets[bullet.id] = {};
         bullets[bullet.id].x = bullet.x;
         bullets[bullet.id].y = bullet.y;
@@ -95,4 +99,4 @@ setInterval(function(){
         socket.emit("update", {"players":players, "bullets":bullets}); 
     }
 
-},1000/25);
+},1000/100);
