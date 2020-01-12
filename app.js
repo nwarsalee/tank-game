@@ -71,7 +71,7 @@ setInterval(function(){
         
         //shot-check
         if (player.keys['spaceBar'] && player.timer <= 0){
-            BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle)); //x,y,dx,dy
+            BULLETLIST.push(new Entities.Bullet(player.x, player.y, player.shot_angle, player.id)); //x,y,dx,dy
             player.timer = 40;
         }
 
@@ -85,10 +85,18 @@ setInterval(function(){
         let bullet = BULLETLIST[i];
 
         bullet.updatePosition();//Static method that will shoot each bullet in the direction they are going
-        //check if bullet should be deleted from list
-        if (outOfBounds(bullet)) {
+        
+        for(let i in PLAYERLIST){ //check collision with each player
+            let player = PLAYERLIST[i];
+            if (bullet.id != player.id && Math.pow(player.x - bullet.x, 2) + Math.pow(player.y - bullet.y, 2) <= (25 + 2.5)**2){
+                //hit detection
+                delete PLAYERLIST[i];
+                delete SOCKETLIST[i];
+            }
+        }
+
+        if (outOfBounds(bullet)) {//check if bullet should be deleted from list
             BULLETLIST.splice(i, 1);
-            console.log(BULLETLIST);
         }
 
         bullets[bullet.id] = {};

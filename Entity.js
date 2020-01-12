@@ -17,7 +17,7 @@ class Entity {
 }
 
 class Bullet extends Entity {
-    constructor(x, y, angle) {
+    constructor(x, y, angle, id) {
         super();
         this.x = x + 25;
         this.y = y + 25;
@@ -25,7 +25,7 @@ class Bullet extends Entity {
         this.dy = 0;
         this.mag = 20;
         this.angle = angle;
-        this.id = Entity.getRandomInt(1000);
+        this.id = id;
     }
 
     updatePosition(){
